@@ -1,0 +1,26 @@
+image: clojure:openjdk-8-lein
+
+before_script:
+  - sleep 15
+
+services:
+  - mongo
+  
+connect:
+  image: mongo
+  script:
+    - ./bin/ci/before_script.sh
+
+job:
+  tags:
+    - newbie
+  stage: test
+  script:
+    - lein do clean
+    - javac
+    - test
+  artifacts:
+    paths:
+      - test
+  only:
+    - master

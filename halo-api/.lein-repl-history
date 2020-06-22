@@ -1,0 +1,125 @@
+(require '[clj-http.client :as client])
+(client/get "http://example.com/resources/id")
+(def wechat-baseurl "https://api.weixin.qq.com/sns/oauth2/")
+(def appid "wx266e47607c3efa09")
+(def appsecret "7e4cebe9d919150ef7732d86f16dccc4")
+(def code 021guJA00x2AdJ1EiwC00DiJA00guJAK)
+(def code "021guJA00x2AdJ1EiwC00DiJA00guJAK")
+(client/get "http://example.com/resources/3"
+                                          {:accept :json
+                                           :query-params {:appid appid
+                                                          :secret appsecret
+                                                          :code code
+                                                          :grant_type "authorization_code"}})
+(require '[monger.core :as mg])
+(def mongo {:host "localhost"
+            :port 27017})
+(let [conn (mg/connect mongo)]
+     (print conn))
+conn
+(conn)
+(def conn (mg/connect mongo))
+conn
+(def db (mg/get-db conn "monger-test"))
+db
+ (mc/insert db "documents" { :_id (ObjectId.) :first_name "John" :last_name "Lennon" })
+(require '[monger.collection :as mc])
+ (mc/insert db "documents" { :_id (ObjectId.) :first_name "John" :last_name "Lennon" })
+ (mc/insert db "documents" { :_id 1 :first_name "John" :last_name "Lennon" })
+(require '[monger.collection :as mc])
+(ns halo-api.mongo
+    (:require [monger.core :as mg]
+              [settings :as settings]))
+(def conn (mg/connect settings/mongo))
+settings/mongo
+(mg/connect settings/mongo)
+(def conn (mg/connect {settings/mongo} ))
+(def conn (mg/connect (settings/mongo)))
+(def conn (mg/connect settings/mongo))
+(def conn (mg/connect (settings/mongo)))
+(def conn (mg/connect settings/mongo))
+ (mc/insert db "documents" { :_id 3 :first_name "George"})
+(require '[monger.core :as mg])
+(require '[monger.collection :as mc])
+ (mc/insert db "documents" { :_id 3 :first_name "George"})
+(def db (mg/get-db conn "monger-test"))
+(def conn (mg/connect settings/mongo))
+(def mongo {:host "localhost"
+            :port 27017})
+(def conn (mg/connect mongo))
+(def db (mg/get-db conn "monger-test"))
+ (mc/insert db "documents" { :_id 3 :first_name "George"})
+ (mc/insert db "documents" { :_id 4 :first_name "George" :gender "male"})
+[crypto.random :refer [base64]]
+(require '[crypto.random :refer [base64]])
+(.toString (java.util.Date.)
+）
+））
+)
+ (.toString (java.util.Date.))
+(.getTime)
+(.getTime (java.util.Date.))
+(def token-expire-time (* 60 60 24 15 1000))
+token-expire-time
+(+ (.getTime (java.util.Date.)) token-expire-time)
+(ns util.auth
+    (:require [crypto.random :refer [base64]]
+              [settings :as settings]
+              [monger.collection :as mc]
+              [halo-api.mongo :as mongo]))
+(defn gen-token []
+      (base64 32))
+(defn save-token! [user-id]
+      (let [[token this-time]  [(gen-token) (.getTime (java.util.Date.))]]
+           (mc/insert mongo/db "token" {:key token
+                                        :user_id user-id
+                                        :expires (+ this-time settings/token-expire-time)})))
+(defn add [x y ])
+(defn add [x y](+ x y))
+(add 3 6)
+(:import org.bson.types.ObjectId)
+(:require '[crypto.random :refer [base64])
+(:require '[crypto.random :refer [base64]])
+(base64 32)
+(ns util.auth
+    (:require [buddy.auth.backends.token :refer [token-backend]]
+              [crypto.random :refer [base64]]
+              [settings :as settings]
+              [monger.collection :as mc]
+              [halo-api.mongo :as mongo]
+              [buddy.core.nonce :as nonce]
+              [buddy.core.codecs :as codecs]))
+quit
+(ns halo-api.mongo
+    (:require [monger.core :as mg]
+              [settings :as settings]
+              [monger.collection :as mc]
+              [monger.conversion :refer [from-db-object]])
+    (:import org.bson.types.ObjectId))
+(def conn (mg/connect settings/mongo))
+(def db (mg/get-db conn "monger-test"))
+(defn insert [cl params]
+      (mc/insert db cl params))
+(defn find [cl params]
+      (from-db-object (mc/find db cl params) true))
+(defn get-by-id [cl id]
+      (mc/find-map-by-id db cl (ObjectId. id)))
+(def openid "oyn6u0owU0eHV_S17pTvaQ3RRQ2E")
+(mc/find mongo/db "user" {:openid openid})
+[halo-api.mongo :as mongo]
+(:require '[halo-api.mongo :as mongo])
+(mc/find mongo/db "user" {:openid openid})
+(mc/find db "user" {:openid openid})
+(find find "user" {:openid openid})
+(find "user" {:openid openid})
+(mc/find-maps db "user" {:openid openid})
+(def user (mc/find-maps db "user" {:openid openid}))
+user
+(nil? user)
+(=() user)
+(:require '[halo-api.mongo :as mongo])
+(def f '(1 2 3))
+(0 f)
+(get 0 f)
+(first f)
+(last f)
