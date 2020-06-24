@@ -52,7 +52,7 @@
                                                  :grant_type "authorization_code"}})]
                  (def res (json/read-str (:body response) :key-fn keyword))
                  (let [[openid access_token] [(:openid res) (:access_token res)]]
-                   (println "user profile" openid access_token)
+                   #_(println "user profile" openid access_token)
                    (if openid
                      (do
                        (def user (first (mc/find-maps mongo/db "user" {:openid openid})))
@@ -94,11 +94,13 @@
       (GET "/orders"
            {:keys [headers params body] :as request}
            (ok (let [user (auth/authenticate-token (get headers "authorization"))]
-                 ;(println "orders" (:orders user))
-                 (println "????")
-                 (mc/find-maps mongo/db "order"
-                               {:_id {$in (:orders user)}}
-                               ["item" "fee" "status"])))))));find user,return token
+                 (println "orders" (:orders user))
+                 (let [orders (:orders user)]
+                   (if (nil? orders)
+                     (ok '[])
+                     (mc/find-maps mongo/db "order"
+                                   {:_id {$in orders}}
+                                   ["item" "fee" "status"])))))))));find user,return token
 
 
 (defn -main

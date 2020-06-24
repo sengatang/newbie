@@ -15,14 +15,9 @@
                                                   :openid "test openid"}))
   (def test-token (save-token! (:_id test-user))))
 
-(defn roll-back-test []
-  (mc/remove db "token" {:user_id (:_id test-user)})
-  (mc/remove db "user" {:_id test-user}))
-
 (defn wrap-test [test-fn]
   (user-init)
-  (test-fn)
-  (roll-back-test))
+  (test-fn))
 
 (deftest test-app
   (testing "hello world"
@@ -37,6 +32,12 @@
       (is (= (:status response) 400))
       (is (= (:body response) "Code Required!")))))
 
+(deftest test-code-login
+  (testing "login with fake code"
+    (let [response (app (mock/request :get "/wechat/auth" {:code "fake one"}))]
+      (is (= (:status response) 400))
+      (is (= (:body response) "Wechat Openid Not Available!")))))
+
 (deftest test-orders
   (testing "orders"
     (let [response (app (-> (mock/request :post "/base/orders" nil)
@@ -46,13 +47,23 @@
         (is (= (:status response) 200))
         (is (= res {:item "text book" :fee "4500" :status "unpaid"}))))))
 
+(deftest test-get-orders
+  (testing "get orders"
+    (let [response (app (-> (mock/request :get"/base/orders")
+                            (mock/header "Authorization" test-token)))]
+      (let [res (json/read-str (slurp (:body response)):key-fn keyword)]
+        (is (= (:status res) 200))
+        (is (= (:body res) '[]))))))
+
 (deftest test-logout
   (testing "logout"
     (let [response (app (-> (mock/request :post "/base/logout" nil)
                             (mock/header "Authorization" test-token)))]
+      (mc/remove db "user" {:_id test-user})
       (let [res (json/read-str (slurp (:body response)) :key-fn keyword)]
         (is (= (:status response) 200))
         (is (= res {:msg "success"}))))))
+
 
 (use-fixtures :once wrap-test)
 (run-tests)
