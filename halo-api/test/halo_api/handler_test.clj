@@ -1,4 +1,4 @@
-(ns halo_api.hander-test
+(ns halo_api.handler-test
   (:use clojure.test)
   (:require [halo-api.handler :refer :all]
             [halo-api.mongo :refer :all]
@@ -9,15 +9,15 @@
 
 (defn user-init []
   (def test-user (mc/insert-and-return db "user" {:gender 1
-                                             :nickname "Test User"
-                                             :city "Utopia"
-                                             :country "Utopia"
-                                             :openid "test openid"}))
+                                                  :nickname "Test User"
+                                                  :city "Utopia"
+                                                  :country "Utopia"
+                                                  :openid "test openid"}))
   (def test-token (save-token! (:_id test-user))))
 
 (defn roll-back-test []
-  (mc/remove db "token" { :user_id (:_id test-user)})
-  (mc/remove db "user" { :_id test-user}))
+  (mc/remove db "token" {:user_id (:_id test-user)})
+  (mc/remove db "user" {:_id test-user}))
 
 (defn wrap-test [test-fn]
   (user-init)
