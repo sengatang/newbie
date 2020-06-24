@@ -6,7 +6,7 @@ before_script:
   # Give MongoDB server some time to boot
   - sleep 15
   - mongod --version
-  - ./bin/ci/before_script.sh
+  # - ./bin/ci/before_script.sh
 script: lein do clean, javac, test
 jdk:
   - openjdk8

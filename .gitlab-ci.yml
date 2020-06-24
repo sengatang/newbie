@@ -9,7 +9,7 @@ services:
 connect:
   image: mongo
   script:
-    - ./bin/ci/before_script.sh
+    # - ./bin/ci/before_script.sh
 
 job:
   tags:
