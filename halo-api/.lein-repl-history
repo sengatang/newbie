@@ -123,3 +123,136 @@ user
 (get 0 f)
 (first f)
 (last f)
+quit
+(is (thrown? ArithmeticException (/ 1 0)))
+(use 'clojure.test)
+(is (thrown? ArithmeticException (/ 1 0)))
+(is (= 5 (+ 4 2))
+(is (= 4 (+ 4 2))
+(is (= 6 (+ 4 2))
+(defn square [x]
+  (* x x))
+(deftest test-square
+  (is (= 4 (square 2)))
+  (is (= 9 (square -3))))
+(deftest test-square
+  (is (= 4 (square 2)))
+  (is (= 9 (square -3))))
+(run-tests 'example)
+(ns example
+  (:use [clojure.test :only [deftest is run-tests]]))
+(run-tests 'example)
+quit
+(ns example
+  (:use [clojure.test :only [deftest is run-tests]]))
+(defn square [x]
+  (* x x))
+(deftest test-square
+  (is (= 4 (square 2)))
+  (is (= 9 (square -3))))
+(run-tests 'example)
+(is (= 5 (+ 2 2)))
+(is (thrown? ArithmeticException (/ 1 0))) 
+(is (= 5 (+ 2 2)) "Crazy arithmetic")
+(testing "Arithmetic"
+  (testing "with positive integers"
+    (is (= 4 (+ 2 2)))
+    (is (= 7 (+ 3 4))))
+  (testing "with negative integers"
+    (is (= -4 (+ -2 -2)))
+    (is (= -1 (+ 3 -4)))))
+(:use 'clojure.test)
+(testing "Arithmetic"
+  (testing "with positive integers"
+    (is (= 4 (+ 2 2)))
+    (is (= 7 (+ 3 4))))
+  (testing "with negative integers"
+    (is (= -4 (+ -2 -2)))
+    (is (= -1 (+ 3 -4)))))
+(with-test
+    (defn my-function [x y]
+      (+ x y))
+  (is (= 4 (my-function 2 2)))
+  (is (= 7 (my-function 3 4))))
+(deftest addition
+  (is (= 4 (+ 2 2)))
+  (is (= 7 (+ 3 4))))
+(ns base-test
+  (:use clojure.test))
+(with-test
+  (defn add2 [x]
+    (+ x 2))
+  (is (= 4 (add2 2)))
+  (is (= 5 (add2 3))))
+(let [{opt1 :option} {:option false} opt1 (or opt1 true)
+{opt2 :option :or {opt2 true}} {:option false}] {:opt1 opt1 :opt2 opt2})
+(let [{k :unknown x :a :or {k 50}} m]
+  (+ k x))
+(let [{k :unknown x :a :or {k 50}} 50]
+  (+ k x))
+(let [{opt1 :option} {:option false}] opt1)
+{opt1 :option} 
+(def m {:a 5 :b 6 :c [7 8 9]
+:d {:e 10 :f 11} "foo" 88
+42 false})
+m
+(let [{a :a b :b} m] (+ a b))
+(let [{f "foo"} m] (+ f 12))
+(let [{v 42} m]
+(if v 1 0))
+(let [{x 3 y 8} [12 0 0 -18 44 6 0 0 1]] (+ x y))
+(let [{{e :e} :d} m] (* 2 e))
+opt1 (or opt1 true)  
+(def x false)
+(or x 3)
+quit
+(ns hander-test
+  (:use clojure.test)
+  (:require [halo_api.handler :as handler]
+            [ring.mock.request :as mock]))
+(:require '[halo_api.handler :as handler])
+(:require '[ring.mock.request :as mock])
+(def response (handler/app (mock/request :get "/hello/world")))
+(:require '[halo_api.handler :as handler])
+handler
+(ns halo_api.handler)
+(def response (app (mock/request :get "/hello/world")))
+quit
+*ns*
+(ns halo-api.handler
+  (:require [compojure.api.sweet :refer :all]
+            [ring.util.http-response :refer :all]
+            [schema.core :as s]
+            [clj-http.client :as client]
+            [clojure.data.json :as json]
+            [monger.collection :as mc]
+            [monger.operators :refer :all]
+            [settings :as settings]
+            [halo-api.mongo :as mongo]
+            [util.auth :as auth]
+            [util.wechat :as wechat]
+            [ring.adapter.jetty :as jetty]))
+app
+(deftest test-app
+  (testing "hello world"
+    (let [response (handler/app (mock/request :get "/hello/world"))
+          (println "response" (:body response))])))
+(ns hander-test
+  (:use clojure.test)
+  (:require [halo_api.handler :as handler]
+            [ring.mock.request :as mock]))
+(ns user)
+(ns hander-test
+  (:use clojure.test)
+  (:require [halo_api.handler :as handler]
+            [ring.mock.request :as mock]))
+(ns hander-test
+  (:use clojure.test)
+  (:require [halo_api.handler :as handler]
+))
+(:require '[ring.mock.request :as mock])
+response (handler/app (mock/request :get "/hello/world")
+)
+(def response (app (mock/request :get "/hello/world"))
+)
+quit

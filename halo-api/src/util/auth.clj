@@ -1,13 +1,11 @@
 (ns util.auth
-    (:require [buddy.auth.backends.token :refer [token-backend]]
+    (:require [halo_api.settings :as settings]
               [crypto.random :refer [base64]]
-              [settings :as settings]
               [monger.collection :as mc]
               [halo-api.mongo :as mongo]
               [buddy.core.nonce :as nonce]
               [buddy.core.codecs :as codecs]
-              [buddy.auth :refer [authenticated? throw-unauthorized]]
-              [buddy.auth.backends.token :refer [token-backend]]))
+              [buddy.auth :refer [throw-unauthorized]]))
 
 (defn gen-token
       []
@@ -39,5 +37,5 @@
       (let [user_id (authenticate? token)]
         #_(println "userid" user_id)
         (if (nil? user_id)
-          (throw (Exception. "unauthorized"))
-          (mongo/get-by-id "user" user_id))))
+          (throw-unauthorized)
+          (mc/find-map-by-id mongo/db "user" user_id))))

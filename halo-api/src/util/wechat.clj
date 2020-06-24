@@ -1,5 +1,6 @@
 (ns util.wechat
-    (:require [clj-http.client :as client]
+    (:require [halo_api.settings :as settings]
+              [clj-http.client :as client]
               [clojure.data.json :as json]))
 
 (defn get-wechat-userifo [access_token openid]

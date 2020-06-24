@@ -6,10 +6,12 @@
                   [org.clojure/data.json "1.0.0"]
                   [com.novemberain/monger "3.1.0"]
                   [buddy "2.0.0"]
-                  [ring "1.4.0"]]
+                  [ring "1.4.0"]
+                  [ring/ring-mock "0.3.2"]]
    :ring {:handler halo-api.handler/app
           :host "0.0.0.0"
           :port 80}
    :uberjar-name "server.jar"
    :profiles {:dev {:dependencies [[javax.servlet/javax.servlet-api "3.1.0"]]
-                   :plugins [[lein-ring "0.12.5"]]}})
+                   :plugins [[lein-ring "0.12.5"]]}}
+   :plugins [[lein-cloverage "1.1.2"]])
